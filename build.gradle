@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+//mainClassName = 'StarfleetMineGrader'
+
+repositories {
+    mavenCentral()
+}
+
+idea {
+    project {
+        jdkName = '1.8'
+        languageLevel = '1.8'
+    }
+}
+
+dependencies {
+    compileOnly "org.projectlombok:lombok:1.16.18"
+}
+
+sourceSets {
+    main.java.srcDir "src/main/java"
+}
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'com.starfleet.StarfleetMineGrader'
+        )
+    }
+}
